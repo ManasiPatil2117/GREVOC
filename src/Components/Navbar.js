@@ -5,7 +5,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
     { name: 'Dashboard', to: '/', current: true },
-    { name: 'Flashcard', to: '/flashcard', current: true },
+    { name: 'Download', to: '/download', current: true },
     { name: 'Quiz', to: '/quiz', current: false },
     { name: 'About', to: '/about', current: false },
     { name: 'Contact us', to: '/contact', current: false },
@@ -20,7 +20,7 @@ export default function Navbar() {
         <Disclosure as="nav" className="bg-gray-100">
             {({ open }) => (
                 <>
-                    <div className="mx-auto  px-2 sm:px-6 lg:px-10">
+                    <div className="mx-auto px-2 sm:px-6 lg:px-10">
                         <div className="relative flex h-16 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                                 {/* Mobile menu button*/}
@@ -130,10 +130,10 @@ export default function Navbar() {
                                     key={item.name}
                                     as={Link}
                                     to={item.to}
-                                    className={classNames(
-                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                        'block rounded-md px-3 py-2 text-base font-medium'
-                                    )}
+                                    className={
+                                         'text-gray-600 hover:bg-gray-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
+                                    }
+
                                     aria-current={item.current ? 'page' : undefined}
                                 >
                                     {item.name}
