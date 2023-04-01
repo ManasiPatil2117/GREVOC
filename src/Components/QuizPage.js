@@ -4,10 +4,12 @@ import QuizData from "./QuizRecords";
 import { motion } from "framer-motion";
 import { containerVariants } from "../motionVarients/motionvarient";
 import { itemVariants } from "../motionVarients/motionvarient";
+import EndQuiz from "./EndQuiz";
 
 export default function QuizPage() {
   const [records, setRecords] = useState([]);
   const [score, setScore] = useState(0);
+  const [showEndQuiz, setShowEndQuiz] = useState(false)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +27,10 @@ export default function QuizPage() {
     getRecords();
     return;
   }, [records.length]);
+
+  function handleEndTest() {
+    setShowEndQuiz(true);
+  }
 
   return (
     <motion.div
@@ -63,12 +69,13 @@ export default function QuizPage() {
             </button>
             <button
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5"
-              onClick={() => {
-                navigate("/dashboard");
-              }}
+              onClick={
+                handleEndTest
+              }
             >
               End Quiz
             </button>
+            {showEndQuiz && <EndQuiz score={score} />}
           </div>
         </motion.div>
       </div>

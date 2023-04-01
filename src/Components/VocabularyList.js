@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 import VocRecord from "./VocRecord";
 
 export default function VocabularyList() {
@@ -45,18 +44,18 @@ export default function VocabularyList() {
       onClick={() => setCurrentPage(currentPage + 1)}
       disabled={currentPage === Math.ceil(records.length / recordsPerPage)}
       className={`text-white bg-blue-700  hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5 ${currentPage === Math.ceil(records.length / recordsPerPage)
-          ? "opacity-50 cursor-not-allowed"
-          : ""
+        ? "opacity-50 cursor-not-allowed"
+        : ""
         }`}
     >
       Next
     </button>
   );
   const filteredRecords = records.filter((record) =>
-  Object.values(record).some((field) =>
-    field.toLowerCase().includes(searchQuery.toLowerCase())
-  )
-);
+    Object.values(record).some((field) =>
+      field.toLowerCase().startsWith(searchQuery.toLowerCase())
+    )
+  );
 
 
   return (
@@ -113,11 +112,11 @@ export default function VocabularyList() {
         {prevButton}
         {nextButton}
       </div>
-      {searchQuery==='' ?currentRecords.map((record) => (
+      {searchQuery === '' ? currentRecords.map((record) => (
         <VocRecord record={record} key={record._id} />
       )) : filteredRecords.map((record) => (
         <VocRecord record={record} key={record._id} />
-      )) }
+      ))}
       <div className="flex justify-center items-center gap-2 mt-4">
         {prevButton}
         {nextButton}

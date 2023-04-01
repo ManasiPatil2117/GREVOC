@@ -8,10 +8,10 @@ export default function Quiz() {
     <div
       id="defaultModal"
       tabindex="-1"
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90"
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80"
     >
       <div className="relative w-full max-w-md md:max-w-lg lg:max-w-xl">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-300">
+        <div className="relative bg-white rounded-lg shadow dark:bg-gray-200">
           <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
             <h3 className="text-xl font-semibold text-gray-900">
               To get started with the quiz, please take a moment to read this:

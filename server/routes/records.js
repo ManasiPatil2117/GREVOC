@@ -1,6 +1,6 @@
 const express = require("express");
 const routes = express.Router();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
 const vocData = require("../db/readVocData");
 routes.get("/record", (req, res) => {
@@ -26,16 +26,20 @@ routes.get("/quiz", (req, res) => {
     });
 });
 
-const postToDB = require('../db/postContactDetails')
+const postToDB = require("../db/postContactDetails");
 routes.use(bodyParser.urlencoded({ extended: true }));
 routes.use(bodyParser.json());
-routes.post('/contact', async (req, res) => {
+routes.post("/contact", async (req, res) => {
   try {
     const { first_name, last_name, email, phone_number, message } = req.body;
-    console.log(req.body)
-    postToDB(req.body)
+    if (!first_name || !last_name || !email || !phone_number || !message) {
+      res.json(null);
+    } else {
+      postToDB(req.body);
+      res.json(1);
+    }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
+});
 module.exports = routes;

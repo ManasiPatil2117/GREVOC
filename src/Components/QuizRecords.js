@@ -31,7 +31,7 @@ export default function QuizRecords({ record, score, setScore, queNo }) {
       </motion.h3>
       <div className="flex flex-wrap justify-center">
         <button
-          className={`w-full md:w-1/2 m-2 bg-gray-300 p-2 border rounded-md hover:bg-slate-400 ${getButtonClass(
+          className={`w-full md:w-1/2 m-2 bg-gray-300 p-2 border rounded-md ${getButtonClass(
             record.Option1
           )}`}
           disabled={isAnswered}
@@ -42,7 +42,7 @@ export default function QuizRecords({ record, score, setScore, queNo }) {
           {record.Option1}
         </button>
         <button
-          className={`w-full md:w-1/2 m-2 bg-gray-300 p-2 border rounded-md hover:bg-slate-400 ${getButtonClass(
+          className={`w-full md:w-1/2 m-2 bg-gray-300 p-2 border rounded-md ${getButtonClass(
             record.Option2
           )}`}
           disabled={isAnswered}
@@ -53,7 +53,7 @@ export default function QuizRecords({ record, score, setScore, queNo }) {
           {record.Option2}
         </button>
         <button
-          className={`w-full md:w-1/2 m-2 bg-gray-300 p-2 border rounded-md hover:bg-slate-400 ${getButtonClass(
+          className={`w-full md:w-1/2 m-2 bg-gray-300 p-2 border rounded-md ${getButtonClass(
             record.Option3
           )}`}
           disabled={isAnswered}
@@ -64,7 +64,7 @@ export default function QuizRecords({ record, score, setScore, queNo }) {
           {record.Option3}
         </button>
         <button
-          className={`w-full md:w-1/2 m-2 bg-gray-300 p-2 border rounded-md hover:bg-slate-400 ${getButtonClass(
+          className={`w-full md:w-1/2 m-2 bg-gray-300 p-2 border rounded-md ${getButtonClass(
             record.Option4
           )}`}
           disabled={isAnswered}
