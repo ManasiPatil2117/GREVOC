@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "body-parser": "^1.20.2",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "cors": "^2.8.5",
@@ -17,7 +18,7 @@
     "express": "^4.18.2",
     "framer-motion": "^10.8.5",
     "mongodb": "^5.1.0",
-    "mongoose": "^7.0.2",
+    "mongoose": "^7.0.3",
     "os-browserify": "^0.3.0",
     "querystring-es3": "^0.2.1",
     "react": "^18.2.0",
@@ -56,5 +57,5 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.2.7"
-  }  
+  }
 }

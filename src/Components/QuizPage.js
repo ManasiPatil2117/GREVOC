@@ -49,9 +49,18 @@ export default function QuizPage() {
           ))}
 
           <div>
-            <span className="text-white  w-72 bg-green-500 font-medium rounded-lg px-5 py-2.5 text-center m-5">
+            <span className="text-white bg-green-500 font-medium rounded-lg px-16 py-2.5 text-center m-5">
               Score: {score}/20
             </span>
+            <br />
+            <button
+              className="text-white bg-blue-700 mt-5 mr-5 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5"
+              onClick={() => {
+                navigate("/quiz");
+              }}
+            >
+              Restart
+            </button>
             <button
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-5"
               onClick={() => {

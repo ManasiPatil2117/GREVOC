@@ -1,5 +1,6 @@
 const db = require('./conn');
 const mongoose = db.mongoose;
+
 const dataSchema = mongoose.Schema({
     Question: String,
     Option1: String,
@@ -8,6 +9,7 @@ const dataSchema = mongoose.Schema({
     Option4: String,
     Ans: String
 }, { collection: 'quizData' })
+
 const DataModel = mongoose.models['quizData'] || mongoose.model('quizData', dataSchema)
 const quizData = async () => {
     try {
@@ -17,4 +19,5 @@ const quizData = async () => {
         console.log("Error in retriving quizData : " + error)
     }
 }
+
 module.exports = quizData;
