@@ -41,7 +41,7 @@ export default function QuizPage() {
     >
       <div className="bg-gray-100 py-12 px-1 sm:px-6 lg:px-8 text-center">
         <motion.div
-          className="bg-white shadow-md rounded-lg overflow-hidden lg:mr-20 lg:ml-20 "
+          className="bg-white shadow-md rounded-lg overflow-hidden lg:mr-20 lg:ml-20 m-4"
           variants={itemVariants}
         >
           {records.map((records, index) => (

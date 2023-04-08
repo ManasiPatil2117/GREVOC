@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-    { name: 'Dashboard', to: '/', current: true },
+    { name: 'Dashboard', to: '/dashboard', current: true },
     { name: 'Download', to: '/download', current: true },
     { name: 'Quiz', to: '/quiz', current: false },
     { name: 'About', to: '/about', current: false },
@@ -15,7 +15,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar() {
+export default function Navbar({ currentUser }) {
     return (
         <Disclosure as="nav" className="bg-gray-100">
             {({ open }) => (
@@ -23,7 +23,6 @@ export default function Navbar() {
                     <div className="mx-auto px-2 sm:px-6 lg:px-10">
                         <div className="relative flex h-16 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                                {/* Mobile menu button*/}
                                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
@@ -87,36 +86,43 @@ export default function Navbar() {
                                     leaveTo="transform opacity-0 scale-95"
                                 >
                                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        {currentUser != "" &&
+                                            <>
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <Link
+                                                            to="/userProfile"
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                        >
+                                                            Your Profile
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                               
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <Link
+                                                            to="/signin"
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                        >
+                                                            Sign out
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                            </>
+                                        }
+                                        {currentUser == "" && <>
                                         <Menu.Item>
-                                            {({ active }) => (
-                                                <a
-                                                    to="#"
-                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                >
-                                                    Your Profile
-                                                </a>
-                                            )}
-                                        </Menu.Item>
-                                        <Menu.Item>
-                                            {({ active }) => (
-                                                <a
-                                                    to="#"
-                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                >
-                                                    Settings
-                                                </a>
-                                            )}
-                                        </Menu.Item>
-                                        <Menu.Item>
-                                            {({ active }) => (
-                                                <a
-                                                    to="#"
-                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                >
-                                                    Sign out
-                                                </a>
-                                            )}
-                                        </Menu.Item>
+                                                    {({ active }) => (
+                                                        <Link
+                                                            to="/signin"
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                        >
+                                                            Sign In
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                        </>}
                                     </Menu.Items>
                                 </Transition>
                             </Menu>
@@ -131,7 +137,7 @@ export default function Navbar() {
                                     as={Link}
                                     to={item.to}
                                     className={
-                                         'text-gray-600 hover:bg-gray-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
+                                        'text-gray-600 hover:bg-gray-800 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
                                     }
 
                                     aria-current={item.current ? 'page' : undefined}

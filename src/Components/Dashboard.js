@@ -11,7 +11,7 @@ export default function Dashboard() {
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible" exit="exit">
-      <div className="bg-gray-100 py-12 px-1 sm:px-6 lg:px-8 ">
+      <div className="bg-gray-100 py-12 px-1 sm:px-6 lg:px-8">
         <motion.div variants={itemVariants}>
           <div className="max-w-7xl mx-auto">
             <div className="lg:text-center">

@@ -33,7 +33,7 @@ export default function Download() {
         >
             <div className="bg-gray-100 py-12 px-1 sm:px-6 lg:px-8 h-screen">
                 <motion.div
-                    className="bg-white shadow-md rounded-lg overflow-hidden lg:mr-20 lg:ml-20 mt-20 "
+                    className="bg-white shadow-md rounded-lg overflow-hidden lg:mr-20 lg:ml-20 mt-20 m-4"
                     variants={itemVariants}
                 >
                     <div className="p-4 m-8">

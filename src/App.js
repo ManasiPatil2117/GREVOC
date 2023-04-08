@@ -8,20 +8,33 @@ import About from "./Components/About";
 import Contact from "./Components/Contact";
 import VocabularyList from "./Components/VocabularyList";
 import QuizPage from "./Components/QuizPage";
+import SignUp from "./Components/SignUp";
+import SignIn from "./Components/SignIn";
+import { useState, useEffect } from "react";
+import UserProfile from "./Components/UserProfile";
+
 function App() {
+  const [currentUser, setCurrentUser] = useState("")
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
+  
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <Navbar currentUser={currentUser} />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<SignIn />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/download" element={<Download />} />
-          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quiz" element={<Quiz currentUser={currentUser}/>} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/vocabularylist" element={<VocabularyList />} />
           <Route path="/quizpage" element={<QuizPage />} />
+          <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} />} />
+          <Route path="/signin" element={<SignIn setCurrentUser={setCurrentUser} />} />
+          <Route path="/userProfile" element={<UserProfile currentUser={currentUser}/>} />
         </Routes>
       </BrowserRouter>
     </>
