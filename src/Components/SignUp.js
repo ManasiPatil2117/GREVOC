@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import bcrypt from "bcryptjs"
 
-export default function SignUp({ setCurrentUser }) {
+export default function SignUp({ setCurrentUser , setCurrentEmail}) {
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -66,9 +66,10 @@ export default function SignUp({ setCurrentUser }) {
     } else if (data === -1) {
       setErrorMessage("Please Fill the Complete Details");
     } else {
-      setGetGreen("text-green-700 text-3xl pl-20 ml-4")
+      setGetGreen("text-3xl pl-20 ml-4 text-green-700 ")
       setErrorMessage("Signed up Successfully!");
       setCurrentUser(username);
+      setCurrentEmail(email);
       setTimeout(() => { setErrorMessage("Taking you to home page...") }, 1000)
       setUserData({ email: "", password: "" });
       setTimeout(() => { navigate("/dashboard") }, 2000)

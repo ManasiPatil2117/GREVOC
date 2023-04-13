@@ -6,10 +6,11 @@ import { containerVariants } from "../motionVarients/motionvarient";
 import { itemVariants } from "../motionVarients/motionvarient";
 import EndQuiz from "./EndQuiz";
 
-export default function QuizPage() {
+export default function QuizPage({currentEmail}) {
   const [records, setRecords] = useState([]);
   const [score, setScore] = useState(0);
   const [showEndQuiz, setShowEndQuiz] = useState(false)
+  const [reply, setReply] = useState("")
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +30,11 @@ export default function QuizPage() {
   }, [records.length]);
 
   function handleEndTest() {
+    if (score < 10) {
+      setReply("Keep practicing\n Score is: " + score);
+    } else {
+      setReply("You did well\n Score is: " + score);
+    }
     setShowEndQuiz(true);
   }
 
@@ -75,7 +81,7 @@ export default function QuizPage() {
             >
               End Quiz
             </button>
-            {showEndQuiz && <EndQuiz score={score} />}
+            {showEndQuiz && <EndQuiz score={score} reply={reply} currentEmail={currentEmail}/>}
           </div>
         </motion.div>
       </div>

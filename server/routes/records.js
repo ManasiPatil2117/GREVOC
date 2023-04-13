@@ -80,4 +80,15 @@ routes.post("/signin", async (req, res) => {
   }
 });
 
+const scoreData = require("../db/postScoreDetails");
+routes.post("/scoreBoard", async (req, res) => {
+  try {
+     await scoreData(req.body)
+     console.log("inserted /score")
+      res.json(1);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = routes;

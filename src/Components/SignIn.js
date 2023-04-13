@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom'
 
 
-export default function SignIn({ setCurrentUser }) {
+export default function SignIn({ setCurrentUser,setCurrentEmail }) {
     setCurrentUser("")
     const [userData, setUserData] = useState({ email: "", password: "" });
     const [errorMessage, setErrorMessage] = useState("");
@@ -41,7 +41,8 @@ export default function SignIn({ setCurrentUser }) {
         const data = await res.json();
 
         if (data) {
-            setCurrentUser(data)
+            // setCurrentEmail(email);
+            // setCurrentUser(data)
             navigate("/dashboard");
         } else if (data === -1) {
             setErrorMessage("Please Fill the Complete Details");

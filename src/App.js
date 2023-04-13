@@ -15,6 +15,7 @@ import UserProfile from "./Components/UserProfile";
 
 function App() {
   const [currentUser, setCurrentUser] = useState("")
+  const [currentEmail, setCurrentEmail] = useState("")
   useEffect(() => {
     console.log(currentUser);
   }, [currentUser]);
@@ -24,17 +25,18 @@ function App() {
       <BrowserRouter>
         <Navbar currentUser={currentUser} />
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route path="/" element={<SignIn setCurrentUser={setCurrentUser}/>} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/download" element={<Download />} />
           <Route path="/quiz" element={<Quiz currentUser={currentUser}/>} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/vocabularylist" element={<VocabularyList />} />
-          <Route path="/quizpage" element={<QuizPage />} />
-          <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} />} />
-          <Route path="/signin" element={<SignIn setCurrentUser={setCurrentUser} />} />
+          <Route path="/quizpage" element={<QuizPage currentEmail={currentEmail}/>} />
+          <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} setCurrentEmail={setCurrentEmail} />} />
+          <Route path="/signin" element={<SignIn setCurrentUser={setCurrentUser} setCurrentEmail={setCurrentEmail}/>} />
           <Route path="/userProfile" element={<UserProfile currentUser={currentUser}/>} />
+          {console.log(currentEmail)}
         </Routes>
       </BrowserRouter>
     </>
