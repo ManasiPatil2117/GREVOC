@@ -30,6 +30,7 @@
     "react-mongodb": "^0.0.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+    "react-speech-kit": "^3.0.1",
     "stream-http": "^3.2.0",
     "util": "^0.12.5",
     "web-vitals": "^2.1.4"
