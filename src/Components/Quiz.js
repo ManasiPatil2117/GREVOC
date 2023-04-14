@@ -7,7 +7,7 @@ export default function Quiz({ currentUser }) {
 
   return (
     <>
-      {currentUser == "" ? <LoginModal /> :
+      {currentUser === "" ? <LoginModal /> :
         <div
           id="defaultModal"
           tabindex="-1"

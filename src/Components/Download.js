@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { containerVariants } from "../motionVarients/motionvarient";
 import { itemVariants } from "../motionVarients/motionvarient";

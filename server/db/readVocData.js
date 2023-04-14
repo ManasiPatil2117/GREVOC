@@ -4,8 +4,8 @@ const dataSchema = mongoose.Schema({
     id: Number,
     word: String,
     definition: String
-}, { collection: 'data' })
-const DataModel = mongoose.models['data'] || mongoose.model('data', dataSchema)
+}, { collection: 'vocabulary' })
+const DataModel = mongoose.models['vocabulary'] || mongoose.model('vocabulary', dataSchema)
 const vocData = async () => {
     try {
         const result = await DataModel.find({});

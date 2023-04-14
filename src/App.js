@@ -24,7 +24,7 @@ function App() {
       <BrowserRouter>
         <Navbar currentUser={currentUser} />
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route path="/" element={<SignIn setCurrentUser={setCurrentUser}/>} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/download" element={<Download />} />
           <Route path="/quiz" element={<Quiz currentUser={currentUser}/>} />
