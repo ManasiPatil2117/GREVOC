@@ -8,7 +8,6 @@ export default function SignIn({ setCurrentUser }) {
     setCurrentUser("")
     const [userData, setUserData] = useState({ email: "", password: "" });
     const [errorMessage, setErrorMessage] = useState("");
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const navigate = useNavigate();
 
     const handleInput = async (e) => {
@@ -19,11 +18,6 @@ export default function SignIn({ setCurrentUser }) {
 
     const signinForm = async (e) => {
         e.preventDefault();
-        const isValidEmail = emailRegex.test(userData.email);
-        if (!isValidEmail) {
-            setErrorMessage("Please enter a valid email address");
-            return;
-        }
 
         var { email, password } = userData;
         email = email.toLowerCase()
@@ -40,14 +34,11 @@ export default function SignIn({ setCurrentUser }) {
         });
         const data = await res.json();
 
-        if (data) {
-            setCurrentUser(data)
+        if (data === 1) {
+            setCurrentUser(email);
             navigate("/dashboard");
-        } else if (data === -1) {
-            setErrorMessage("Please Fill the Complete Details");
         } else {
-            setErrorMessage("Invalid Credentials");
-            setUserData({ email: "", password: "" });
+            setErrorMessage(data);
         }
     };
     return (

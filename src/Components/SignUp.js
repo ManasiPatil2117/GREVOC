@@ -1,14 +1,11 @@
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "../motionVarients/motionvarient"; // Combined import
+import { containerVariants, itemVariants } from "../motionVarients/motionvarient";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import bcrypt from "bcryptjs"
 
 export default function SignUp({ setCurrentUser }) {
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const [getGreen, setGetGreen] = useState("")
   const navigate = useNavigate()
 
   const handleInput = (e) => {
@@ -20,33 +17,8 @@ export default function SignUp({ setCurrentUser }) {
   const loginForm = async (e) => {
     e.preventDefault();
     e.target.value = " "
-    const isValidEmail = emailRegex.test(userData.email);
-    if (!isValidEmail) {
-      setErrorMessage("Please enter a valid email address");
-      return;
-    }
 
     var { username, email, password, confirmPassword } = userData;
-    email = email.toLowerCase()
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match")
-      return
-    }
-    const hashPassword = (password) => {
-      return new Promise((resolve, reject) => {
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(password, salt, (err, hash) => {
-            if (err) reject(err);
-            resolve(hash);
-          });
-        });
-      });
-    }
-
-    await hashPassword(password)
-      .then((hash) => {
-        password = hash;
-      })
 
     const res = await fetch("http://localhost:5000/signup", {
       method: "POST",
@@ -57,25 +29,22 @@ export default function SignUp({ setCurrentUser }) {
         username,
         email,
         password,
+        confirmPassword,
       }),
     });
+
     const data = await res.json();
 
     if (data === 1) {
-      setErrorMessage("Email already exists!");
-    } else if (data === -1) {
-      setErrorMessage("Please Fill the Complete Details");
-    } else {
-      setGetGreen("text-green-700 text-3xl pl-20 ml-4")
-      setErrorMessage("Signed up Successfully!");
       setCurrentUser(username);
-      setTimeout(() => { setErrorMessage("Taking you to home page...") }, 1000)
       setUserData({ email: "", password: "" });
-      setTimeout(() => { navigate("/dashboard") }, 2000)
-
-
+      alert("Signed up Successfully!");
+      navigate("/dashboard");
+    } else {
+      setErrorMessage(data);
     }
-  };
+
+  }
   return (
     <div className=" bg-gray-100 lg:px-20 px-4  sm:py-10 min-h-screen overflow-hidden">
       <motion.div
@@ -95,7 +64,7 @@ export default function SignUp({ setCurrentUser }) {
           </div>
 
           <form method="POST" className="mx-20 mt-10">
-            <strong className={`font-bold text-red-700 ${getGreen}`}>{errorMessage}</strong>
+            <strong className="font-bold text-red-700 ">{errorMessage}</strong>
             <span className="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
             <div className="grid grid-cols-1 gap-y-4 gap-x-8 sm:grid-cols-2">
               <div className="sm:col-span-2">

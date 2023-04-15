@@ -1,23 +1,39 @@
 const con = require('./conn')
+const bcrypt = require("bcryptjs")
+
 const mongoose = con.mongoose;
 
-var flag = 0;
-
 const postToDB = async (data) => {
+    if (!data.username || !data.email || !data.password || !data.confirmPassword) {
+        return "Please Fill the Complete Details";
+
+    }
+    data.email = data.email.toLowerCase()
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isValidEmail = emailRegex.test(data.email);
+    if (!isValidEmail) {
+        return "Please enter a valid email address";
+    }
+    if (data.password !== data.confirmPassword) {
+        return "Passwords do not match";
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(data.password, salt);
+    data.password = hashedPassword;
+
     let db = mongoose.connection;
     const doc = await db.collection('signupDetails').findOne({ email: data.email })
     if (doc) {
-        flag = 1;
+        return "Email Already Exists";
     } else {
-        flag=0;
-        db.collection('signupDetails').insertOne(data, function (err, collection) {
+
+        await db.collection('signupDetails').insertOne(data, function (err, collection) {
             if (err) throw err;
             console.log("Record inserted Successfully");
         });
+        return 1;
     }
 }
-const getFlag = () => {
-    return flag;
-}
 
-module.exports = { postToDB, getFlag };
+module.exports = postToDB;

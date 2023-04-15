@@ -3,6 +3,15 @@ const mongoose = con.mongoose;
 const bcrypt = require('bcryptjs');
 
 const checkUser = async (data) => {
+    if (!data.email || !data.password)
+        return "Please Fill the Complete Details";
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    const isValidEmail = emailRegex.test(data.email);
+    if (!isValidEmail) {
+        return "Please enter a valid email address";
+    }
 
     try {
         const db = mongoose.connection;
@@ -11,10 +20,12 @@ const checkUser = async (data) => {
             const actualPass = user.password;
             const check = await bcrypt.compare(data.password, actualPass);
             if (check) {
-                return user.username;
+                return 1;
+            }else{
+                return "Invalid Credentials"
             }
         } else {
-            return false;
+            return "User does not exists!";
         }
     } catch (error) {
         console.log(error);
@@ -22,4 +33,4 @@ const checkUser = async (data) => {
     }
 };
 
-module.exports = { checkUser };
+module.exports = checkUser;

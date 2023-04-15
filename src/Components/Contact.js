@@ -4,10 +4,11 @@ import { itemVariants } from '../motionVarients/motionvarient'
 import { useState } from 'react'
 
 export default function Contact() {
-
+    const [errorMessage, setErrorMessage] = useState("");
     const [userData, setUserData] = useState({ first_name: "", last_name: "", email: "", phone_number: "", message: "" })
 
     const handleInput = (e) => {
+        setErrorMessage("");
         const name = e.target.name;
         const value = e.target.value;
         setUserData({ ...userData, [name]: value })
@@ -25,11 +26,10 @@ export default function Contact() {
             })
         })
         const data = await res.json();
-        if (!data)
-            alert("Please Fill the Complete Details")
-        else {
+        if (data === 1) {
             alert("Thank you for you response")
-            setUserData({ first_name: "", last_name: "", email: "", phone_number: "", message: "" })
+        } else {
+            setErrorMessage(data);
         }
 
     }
@@ -43,8 +43,8 @@ export default function Contact() {
                     <div className="mt-10 text-center">
                         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Contact Us</h2>
                     </div>
-
                     <form method="POST" className="mx-auto max-w-xl sm:mt-10">
+                        <strong className="font-bold text-red-700 ">{errorMessage}</strong>
                         <div className="grid grid-cols-1 gap-y-4 gap-x-8 sm:grid-cols-2">
                             <div>
                                 <label htmlFor="first_name" className="block text-sm font-semibold leading-6 text-gray-900">
@@ -58,7 +58,7 @@ export default function Contact() {
                                         onChange={handleInput}
                                         autoComplete="given-name"
                                         className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        
+
                                     />
                                 </div>
                             </div>
@@ -74,7 +74,7 @@ export default function Contact() {
                                         onChange={handleInput}
                                         autoComplete="family-name"
                                         className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        
+
                                     />
                                 </div>
                             </div>
@@ -91,7 +91,7 @@ export default function Contact() {
                                         onChange={handleInput}
                                         autoComplete="email"
                                         className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        
+
                                     />
                                 </div>
                             </div>
@@ -122,7 +122,7 @@ export default function Contact() {
                                         onChange={handleInput}
                                         autoComplete="tel"
                                         className="block w-full rounded-md border-0 py-2 px-3.5 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                         
+
                                     />
                                 </div>
                             </div>
@@ -137,7 +137,7 @@ export default function Contact() {
                                         onChange={handleInput}
                                         rows={4}
                                         className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        
+
                                     />
                                 </div>
                             </div>
