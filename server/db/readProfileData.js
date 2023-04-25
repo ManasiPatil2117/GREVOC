@@ -11,11 +11,16 @@ const DataModel = mongoose.models['scoreBoard'] || mongoose.model('scoreBoard', 
 
 const getData = async (currentUser) => {
     try {
-        const results = await DataModel.find({email:currentUser.currentUser});
+        const results = await DataModel.find({ email: currentUser.currentUser });
+        if (results.length === 0) {
+            console.log("No data found for email: " + currentUser);
+            return -1;
+        }
         const chartData = results.map((result) => ({
             correctAnswers: result.correctAnswers,
             wrongAnswers: result.wrongAnswers
         }));
+
         return chartData;
     } catch (error) {
         console.log("Error in retrieving data: " + error);

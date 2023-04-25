@@ -7,6 +7,7 @@ import Chart from 'chart.js/auto';
 
 export default function UserProfile({ currentUser }) {
   const [chartData, setChartData] = useState([]);
+  const [scoreInfo, setScoreInfo] = useState("Your Scoreboard");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,30 +23,33 @@ export default function UserProfile({ currentUser }) {
 
 
       const data = await response.json();
+      if (data == -1) {
+        setScoreInfo("We're sorry, but we were unable to locate any score data for your account. Please take a test to view your score")
+      } else {
 
-      var correctAns = data.reduce(function (tot, arr) {
-        return tot + arr.correctAnswers;
+        var correctAns = data.reduce(function (tot, arr) {
+          return tot + arr.correctAnswers;
 
-      }, 0);
+        }, 0);
 
-      var wrongAns = data.reduce(function (tot, arr) {
-        return tot + arr.wrongAnswers;
-      }, 0);
+        var wrongAns = data.reduce(function (tot, arr) {
+          return tot + arr.wrongAnswers;
+        }, 0);
 
-      setChartData([
-        {
-          label: 'Correct Answers',
-          value: correctAns,
-          color: 'green'
-        },
-        {
-          label: 'Wrong Answers',
-          value: wrongAns,
-          color: 'red'
-        }
-      ]);
-    };
-
+        setChartData([
+          {
+            label: 'Correct Answers',
+            value: correctAns,
+            color: 'green'
+          },
+          {
+            label: 'Wrong Answers',
+            value: wrongAns,
+            color: 'red'
+          }
+        ]);
+      };
+    }
     fetchData();
   }, []);
 
@@ -78,8 +82,8 @@ export default function UserProfile({ currentUser }) {
         <motion.div className="bg-white shadow-md rounded-lg overflow-hidden lg:mr-20 lg:ml-20 lg:mt-20 m-4 " variants={itemVariants}>
           <div className="p-4 m-8">
             <motion.h3 className="font-bold text-xl mba-2 text-center">Hello {currentUser}</motion.h3>
-            <motion.p className="text-gray-700 text-base text-center">
-              Your Scoreboard
+            <motion.p className="text-gray-700 text-base text-center mt-5" id="info">
+              {scoreInfo}
             </motion.p>
             <div className='w-2/4 m-auto'>
               <canvas id="myChart" ></canvas>
