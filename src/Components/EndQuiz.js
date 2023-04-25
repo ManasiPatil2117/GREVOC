@@ -1,13 +1,34 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default function EndQuiz({ score }) {
+export default function EndQuiz({ score, currentUser }) {
     const navigate = useNavigate()
     const getStyle = () => {
         if (score < 10)
             return "text-red-600"
         else
             return "text-green-600"
+    }
+
+    const handleExit = async () => {
+        const email = currentUser
+        const correctAnswers = score;
+        const wrongAnswers = 20 - score;
+
+        const res = await fetch("http://localhost:5000/scoreBoard", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email,
+                correctAnswers,
+                wrongAnswers,
+            }),
+        });
+        const data = await res.json();
+        navigate("/dashboard")
+
     }
     return (
         <div
@@ -31,11 +52,10 @@ export default function EndQuiz({ score }) {
                             data-modal-hide="defaultModal"
                             type="button"
                             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            onClick={() => navigate("/dashboard")}
+                            onClick={handleExit}
                         >
                             Exit
                         </button>
-
                     </div>
                 </div>
             </div>

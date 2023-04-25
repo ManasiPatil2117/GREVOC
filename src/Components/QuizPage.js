@@ -6,7 +6,7 @@ import { containerVariants } from "../motionVarients/motionvarient";
 import { itemVariants } from "../motionVarients/motionvarient";
 import EndQuiz from "./EndQuiz";
 
-export default function QuizPage() {
+export default function QuizPage({currentUser}) {
   const [records, setRecords] = useState([]);
   const [score, setScore] = useState(0);
   const [showEndQuiz, setShowEndQuiz] = useState(false)
@@ -75,7 +75,7 @@ export default function QuizPage() {
             >
               End Quiz
             </button>
-            {showEndQuiz && <EndQuiz score={score} />}
+            {showEndQuiz && <EndQuiz score={score} currentUser={currentUser} />}
           </div>
         </motion.div>
       </div>

@@ -31,7 +31,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/vocabularylist" element={<VocabularyList />} />
-          <Route path="/quizpage" element={<QuizPage />} />
+          <Route path="/quizpage" element={<QuizPage currentUser={currentUser}/>} />
           <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} />} />
           <Route path="/signin" element={<SignIn setCurrentUser={setCurrentUser} />} />
           <Route path="/userProfile" element={<UserProfile currentUser={currentUser}/>} />

@@ -12,6 +12,8 @@ app.get('/quiz', require(path.join(__dirname, 'routes/records.js')))
 app.post('/contact', require(path.join(__dirname, 'routes/records.js')))
 app.post('/signup', require(path.join(__dirname, 'routes/records.js')))
 app.post('/signin', require(path.join(__dirname, 'routes/records.js')))
+app.post('/scoreBoard', require(path.join(__dirname, 'routes/records.js')))
+app.post('/profile', require(path.join(__dirname, 'routes/records.js')))
 
 app.listen(port, () => {
     db.connectDB();
