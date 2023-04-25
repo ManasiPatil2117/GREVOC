@@ -24,7 +24,8 @@ export default function Quiz({ currentUser }) {
                 <p className="text-base leading-relaxed ">
                   Welcome to the quiz! You'll be presented with 20 questions, and
                   you only have one chance to select the correct answer for each
-                  question. So make sure you choose wisely! Good luck!
+                  question. If you do not select the answer it will be marked as wrong. 
+                  So make sure you choose wisely! Good luck!
                 </p>
               </div>
               <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -48,7 +49,7 @@ export default function Quiz({ currentUser }) {
             </div>
           </div>
         </div>
-        }
+      }
     </>
 
   );
