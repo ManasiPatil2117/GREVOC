@@ -62,7 +62,6 @@ export default function UserProfile({ currentUser }) {
         chartInstance.destroy();
       }
 
-
       const myChart = new Chart(ctx, {
         type: 'pie',
         data: {
@@ -78,14 +77,14 @@ export default function UserProfile({ currentUser }) {
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible" exit="exit">
-      <div className="bg-gray-100 py-12 px-1 sm:px-6 lg:px-8 h-screen">
+      <div className="bg-gray-100 py-10 px-1 sm:px-6 lg:px-8 h-screen">
         <motion.div className="bg-white shadow-md rounded-lg overflow-hidden lg:mr-20 lg:ml-20 lg:mt-20 m-4 " variants={itemVariants}>
           <div className="p-4 m-8">
             <motion.h3 className="font-bold text-xl mba-2 text-center">Hello {currentUser}</motion.h3>
             <motion.p className="text-gray-700 text-base text-center mt-5" id="info">
-              {scoreInfo}
+              {scoreInfo} 
             </motion.p>
-            <div className='w-2/4 m-auto'>
+            <div className='w-96 m-auto'>
               <canvas id="myChart" ></canvas>
             </div>
           </div>
