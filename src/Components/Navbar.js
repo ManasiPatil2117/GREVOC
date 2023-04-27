@@ -5,7 +5,6 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
     { name: 'Dashboard', to: '/dashboard', current: true },
-    { name: 'Download', to: '/download', current: true },
     { name: 'Quiz', to: '/quiz', current: false },
     { name: 'About', to: '/about', current: false },
     { name: 'Contact us', to: '/contact', current: false },
@@ -64,7 +63,6 @@ export default function Navbar({ currentUser }) {
                                 </div>
                             </div>
 
-                            {/* Profile dropdown */}
                             <Menu as="div" className="relative ml-3">
                                 <div>
                                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -98,7 +96,7 @@ export default function Navbar({ currentUser }) {
                                                         </Link>
                                                     )}
                                                 </Menu.Item>
-                                               
+
                                                 <Menu.Item>
                                                     {({ active }) => (
                                                         <Link
@@ -112,16 +110,16 @@ export default function Navbar({ currentUser }) {
                                             </>
                                         }
                                         {currentUser === "" && <>
-                                        <Menu.Item>
-                                                    {({ active }) => (
-                                                        <Link
-                                                            to="/signin"
-                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                        >
-                                                            Sign In
-                                                        </Link>
-                                                    )}
-                                                </Menu.Item>
+                                            <Menu.Item>
+                                                {({ active }) => (
+                                                    <Link
+                                                        to="/signin"
+                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                    >
+                                                        Sign In
+                                                    </Link>
+                                                )}
+                                            </Menu.Item>
                                         </>}
                                     </Menu.Items>
                                 </Transition>
