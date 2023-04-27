@@ -1,14 +1,24 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function EndQuiz({ score, currentUser }) {
+    const [style, setStyle] = useState("")
+    const [msg, setMsg] = useState("")
     const navigate = useNavigate()
-    const getStyle = () => {
-        if (score < 10)
-            return "text-red-600"
-        else
-            return "text-green-600"
-    }
+    useEffect(() => {
+
+        if (score < 10) {
+            setStyle("text-red-600");
+            setMsg(`Dear user, your score of ${score} on the GRE vocabulary test suggests that your current vocabulary proficiency is below the desired level. Practice well!`);
+        } else {
+            setStyle("text-green-600");
+            setMsg(`Great job on achieving a good score of ${score} on the GRE vocabulary test, indicating that you are performing well in terms of your vocabulary proficiency. Keep it up!`);
+        }
+    }, [score])
+
+
 
     const handleExit = async () => {
         const email = currentUser
@@ -42,9 +52,9 @@ export default function EndQuiz({ score, currentUser }) {
 
                     </div>
                     <div className="p-6 space-y-6">
-                        <div className={`leading-relaxed text-xl ${getStyle()}`
+                        <div className={`leading-relaxed text-xl ${style}`
                         }>
-                            Your Score: {score}
+                            {msg}
                         </div>
                     </div>
                     <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
