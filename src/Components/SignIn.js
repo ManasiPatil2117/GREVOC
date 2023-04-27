@@ -108,11 +108,11 @@ export default function SignIn({ setCurrentUser }) {
                                 className="block w-full rounded-md  bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 onClick={signinForm}
                             >
-                                SignIn
+                                Sign In
                             </button>
                         </div>
                         <Link to="/signup" className="text-blue-800 font-bold float-right mb-8" >
-                            SignUp
+                            Sign Up
                         </Link>
                     </form>
                 </motion.div>
