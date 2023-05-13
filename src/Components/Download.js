@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 
 export default function Download() {
   const navigate = useNavigate();
@@ -7,15 +9,17 @@ export default function Download() {
   const handleDownload = async () => {
     const response = await fetch("http://localhost:5000/record");
     const data = await response.json();
-    const csv = convertToCSV(data);
-    const blob = new Blob([csv], { type: "text/csv" });
-    const downloadUrl = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = downloadUrl;
-    link.download = "GREVOC.csv";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const headers = [['Word', 'Meaning']];
+
+    const rows = data.map(record => [record.word, record.definition ]);
+
+    const doc = new jsPDF();
+    doc.autoTable({
+      head: headers,
+      body: rows
+    });
+
+    doc.save("GREVOC.pdf");
   };
 
   useEffect(() => {
@@ -26,14 +30,6 @@ export default function Download() {
 
     return () => clearTimeout(timer);
   }, [navigate]);
-
-  const convertToCSV = (data) => {
-    const headers = Object.keys(data[0]).join(",") + "\n";
-    const rows = data
-      .map((record) => Object.values(record).join(",") + "\n")
-      .join("");
-    return headers + rows;
-  };
 
   return <></>;
 }
