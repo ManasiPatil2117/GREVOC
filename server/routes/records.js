@@ -72,8 +72,6 @@ const profileData = require("../db/readProfileData");
 routes.post("/profile", async (req, res) => {
   try {
     const result = await profileData(req.body)
-    if(result==-1)
-    res.json(-1);
     res.json(result);
   } catch (error) {
     console.log(error);

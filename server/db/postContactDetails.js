@@ -9,7 +9,7 @@ const postToDB = async (data) => {
     data.email = data.email.toLowerCase()
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const isValidEmail = emailRegex.test(data.email);
-    
+
     if (!isValidEmail) {
         return "Please enter a valid email address";
     }
@@ -18,7 +18,7 @@ const postToDB = async (data) => {
     const check = await db.collection('contactDetails').insertOne(data, function (err, collection) {
         if (err) throw err;
     });
-  
+
     if (check)
         return 1;
 }
