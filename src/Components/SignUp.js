@@ -21,6 +21,11 @@ export default function SignUp({ setCurrentUser }) {
 
     var { username, email, password, confirmPassword } = userData;
 
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match");
+      return;
+    }
+
     const res = await fetch(`${BASE_URL}/signup`, {
       method: "POST",
       headers: {
@@ -30,7 +35,6 @@ export default function SignUp({ setCurrentUser }) {
         username,
         email,
         password,
-        confirmPassword,
       }),
     });
 
