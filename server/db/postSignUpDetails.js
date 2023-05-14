@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs")
 const mongoose = con.mongoose;
 
 const postToDB = async (data) => {
-    if (!data.username || !data.email || !data.password || !data.confirmPassword) {
+    if (!data.username || !data.email || !data.password ) {
         return "Please Fill the Complete Details";
 
     }
@@ -13,9 +13,6 @@ const postToDB = async (data) => {
     const isValidEmail = emailRegex.test(data.email);
     if (!isValidEmail) {
         return "Please enter a valid email address";
-    }
-    if (data.password !== data.confirmPassword) {
-        return "Passwords do not match";
     }
 
     const salt = await bcrypt.genSalt(10);
