@@ -1,9 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import vocabularyimg from '../images/vocabulary.jpg'
-import quiz from '../images/quiz.jpg'
-import download from '../images/download.jpg'
 import { containerVariants } from '../motionVarients/motionvarient'
 import { itemVariants } from '../motionVarients/motionvarient'
 
@@ -25,7 +22,7 @@ export default function Dashboard() {
                 <div className="max-w-2xl mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                   <motion.div className="flex flex-col rounded-lg shadow-lg overflow-hidden" whileHover={{ scale: 1.1 }}>
                     <div className="flex-shrink-0">
-                      <img className="h-48 w-full object-cover" src={vocabularyimg} alt="Words on paper" />
+                      <img className="h-48 w-full object-cover" src="/images/vocabulary.jpg" alt="Words on paper" />
                     </div>
                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                       <div className="flex-1">
@@ -49,7 +46,7 @@ export default function Dashboard() {
 
                   <motion.div className="flex flex-col rounded-lg shadow-lg overflow-hidden" whileHover={{ scale: 1.1 }}>
                     <div className="flex-shrink-0">
-                      <img className="h-48 w-full object-cover" src={quiz} alt="Quiz image" />
+                      <img className="h-48 w-full object-cover" src="/images/quiz.jpg" alt="Quiz image" />
                     </div>
                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                       <div className="flex-1">
@@ -72,7 +69,7 @@ export default function Dashboard() {
                   </motion.div>
                   <motion.div className="flex flex-col rounded-lg shadow-lg overflow-hidden" whileHover={{ scale: 1.1 }}>
                     <div className="flex-shrink-0">
-                      <img className="h-48 w-full object-cover" src={download} alt="Download image" />
+                      <img className="h-48 w-full object-cover" src="/images/download.jpg" alt="Download image" />
                     </div>
                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                       <div className="flex-1">
