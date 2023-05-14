@@ -31,14 +31,11 @@ export default function UserProfile({ currentUserName }) {
       });
 
       const data = await response.json();
-      if (typeof data === 'string') {
-        setScoreInfo("We're sorry, but we were unable to locate any score data for your account. Please take a test to view your score")
-        setUserName(data);
-      } else {
-        setUserName(data.username)
+      setScoreInfo(data.msg)
+      setUserName(data.username);
+      if (Object.keys(data).length === 3) {
         var correctAns = data.chartData.reduce(function (tot, arr) {
           return tot + arr.correctAnswers;
-
         }, 0);
 
         var wrongAns = data.chartData.reduce(function (tot, arr) {

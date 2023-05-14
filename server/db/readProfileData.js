@@ -11,13 +11,12 @@ const DataModel = mongoose.models['scoreBoard'] || mongoose.model('scoreBoard', 
 
 const getData = async (currentUser) => {
     let username = '';
+    let msg = "";
     try {
         const con = mongoose.connection;
         await con.collection('signupDetails').findOne({ email: currentUser.currentUser }, 'username', (err, user) => {
             if (err) {
                 console.error(err);
-            } else if (!user) {
-                console.log(`No user found with email: ${currentUser.currentUser}`);
             } else {
                 username = user.username;
             }
@@ -25,19 +24,19 @@ const getData = async (currentUser) => {
 
         const results = await DataModel.find({ email: currentUser.currentUser });
         if (results.length === 0) {
-            console.log(`No data found for email: ${currentUser.currentUser}`);
-            return username;
+            msg = "We're sorry, but we were unable to locate any score data for your account. Please take a test to view your score";
+            return { username, msg };
         }
         const chartData = results.map((result) => ({
             correctAnswers: result.correctAnswers,
             wrongAnswers: result.wrongAnswers
         }));
+        msg = "Your Scoreboard: ";
 
-
-        return { chartData, username };
+        return { chartData, username, msg };
     } catch (error) {
-        console.log("Error in retrieving data: " + error);
-        return username;
+        msg = "Error in retrieving data " + error;
+        return { username, msg };
     }
 }
 
