@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
+import { BASE_URL } from "../services/helper";
 
 export default function Download() {
   const navigate = useNavigate();
 
   const handleDownload = async () => {
-    const response = await fetch("http://localhost:5000/record");
+    const response = await fetch(`${BASE_URL}/record`);
     const data = await response.json();
     const headers = [['Word', 'Meaning']];
 

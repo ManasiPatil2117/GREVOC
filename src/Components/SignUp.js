@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "../motionVarients/motionvarient";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { BASE_URL } from "../services/helper";
 
 export default function SignUp({ setCurrentUser }) {
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -20,7 +21,7 @@ export default function SignUp({ setCurrentUser }) {
 
     var { username, email, password, confirmPassword } = userData;
 
-    const res = await fetch("http://localhost:5000/signup", {
+    const res = await fetch(`${BASE_URL}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

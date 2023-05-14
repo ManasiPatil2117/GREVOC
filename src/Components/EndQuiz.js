@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { BASE_URL } from "../services/helper";
 
 export default function EndQuiz({ score, currentUser }) {
     const [style, setStyle] = useState("")
@@ -25,7 +26,7 @@ export default function EndQuiz({ score, currentUser }) {
         const correctAnswers = score;
         const wrongAnswers = 20 - score;
 
-        const res = await fetch("http://localhost:5000/scoreBoard", {
+        const res = await fetch(`${BASE_URL}/scoreBoard`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

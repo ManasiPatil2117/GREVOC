@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "../motionVarients/motionvarient";
 import { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom'
+import { BASE_URL } from "../services/helper";
 
 
 export default function SignIn({ setCurrentUser }) {
@@ -22,7 +23,7 @@ export default function SignIn({ setCurrentUser }) {
         var { email, password } = userData;
         email = email.toLowerCase()
 
-        const res = await fetch("http://localhost:5000/signin", {
+        const res = await fetch(`${BASE_URL}/signin`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

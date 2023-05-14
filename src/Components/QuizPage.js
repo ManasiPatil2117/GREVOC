@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { containerVariants } from "../motionVarients/motionvarient";
 import { itemVariants } from "../motionVarients/motionvarient";
 import EndQuiz from "./EndQuiz";
+import { BASE_URL } from "../services/helper";
 
 export default function QuizPage({currentUser}) {
   const [records, setRecords] = useState([]);
@@ -14,7 +15,7 @@ export default function QuizPage({currentUser}) {
 
   useEffect(() => {
     const getRecords = async () => {
-      const response = await fetch("http://localhost:5000/quiz");
+      const response = await fetch(`${BASE_URL}/quiz`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);

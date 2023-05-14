@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import VocRecord from "./VocRecord";
+import { BASE_URL } from "../services/helper";
 
 export default function VocabularyList() {
   const [records, setRecords] = useState([]);
@@ -10,7 +11,7 @@ export default function VocabularyList() {
 
   useEffect(() => {
     const getRecords = async () => {
-      const response = await fetch("http://localhost:5000/record");
+      const response = await fetch(`${BASE_URL}/record`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);

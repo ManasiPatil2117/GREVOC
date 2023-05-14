@@ -4,6 +4,7 @@ import { containerVariants } from '../motionVarients/motionvarient';
 import { itemVariants } from '../motionVarients/motionvarient';
 import Chart from 'chart.js/auto';
 import Cookies from 'js-cookie';
+import { BASE_URL } from '../services/helper';
 
 export default function UserProfile({ currentUserName }) {
   const [currentUser, setCurrentUser] = useState("");
@@ -19,7 +20,7 @@ export default function UserProfile({ currentUserName }) {
 
     const fetchData = async () => {
 
-      const response = await fetch("http://localhost:5000/profile", {
+      const response = await fetch(`${BASE_URL}/profile`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
