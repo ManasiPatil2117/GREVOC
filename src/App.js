@@ -12,29 +12,44 @@ import SignUp from "./Components/SignUp";
 import SignIn from "./Components/SignIn";
 import { useState, useEffect } from "react";
 import UserProfile from "./Components/UserProfile";
+import Cookies from 'js-cookie';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState("")
+  const [currentUser, setCurrentUser] = useState("");
+  const [currentUserName, setCurrentUserName] = useState("");
+
   useEffect(() => {
-    console.log(currentUser);
+    const cookieValue = Cookies.get('currentUser');
+    if (cookieValue) {
+      setCurrentUser(cookieValue);
+    }
+  }, []);
+
+  useEffect(() => {
+    Cookies.set('currentUser', currentUser);
   }, [currentUser]);
-  
+
+  useEffect(() => {
+    console.log("INAPP- ",currentUser);
+    setCurrentUserName(currentUser);
+  }, [currentUser]);
   return (
+
     <>
       <BrowserRouter>
         <Navbar currentUser={currentUser} />
         <Routes>
-          <Route path="/" element={<SignIn setCurrentUser={setCurrentUser}/>} />
+          <Route path="/" element={<SignIn setCurrentUser={setCurrentUser} setCurrentUserName={setCurrentUserName}/>} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/download" element={<Download />} />
-          <Route path="/quiz" element={<Quiz currentUser={currentUser}/>} />
+          <Route path="/quiz" element={<Quiz currentUser={currentUser} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/vocabularylist" element={<VocabularyList />} />
-          <Route path="/quizpage" element={<QuizPage currentUser={currentUser}/>} />
+          <Route path="/quizpage" element={<QuizPage currentUser={currentUser} />} />
           <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} />} />
           <Route path="/signin" element={<SignIn setCurrentUser={setCurrentUser} />} />
-          <Route path="/userProfile" element={<UserProfile currentUser={currentUser}/>} />
+          <Route path="/userProfile" element={<UserProfile currentUser={currentUser} currentUserName={currentUserName}/>} />
         </Routes>
       </BrowserRouter>
     </>

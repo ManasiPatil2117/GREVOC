@@ -3,14 +3,22 @@ import { motion } from 'framer-motion';
 import { containerVariants } from '../motionVarients/motionvarient';
 import { itemVariants } from '../motionVarients/motionvarient';
 import Chart from 'chart.js/auto';
+import Cookies from 'js-cookie';
 
-
-export default function UserProfile({ currentUser }) {
+export default function UserProfile({ currentUserName }) {
+  const [currentUser, setCurrentUser] = useState("");
   const [chartData, setChartData] = useState([]);
   const [scoreInfo, setScoreInfo] = useState("Your Scoreboard");
 
   useEffect(() => {
+    const cookieValue = Cookies.get('currentUser');
+    if (cookieValue) {
+      setCurrentUser(cookieValue);
+    }
+
     const fetchData = async () => {
+      console.log("In userProfile - ", currentUser);
+      
       const response = await fetch("http://localhost:5000/profile", {
         method: "POST",
         headers: {
@@ -20,7 +28,6 @@ export default function UserProfile({ currentUser }) {
           currentUser,
         }),
       });
-
 
       const data = await response.json();
       if (data == -1) {
@@ -51,7 +58,7 @@ export default function UserProfile({ currentUser }) {
       };
     }
     fetchData();
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     if (chartData.length > 0) {
@@ -80,7 +87,7 @@ export default function UserProfile({ currentUser }) {
       <div className="bg-gray-100 py-10 px-1 sm:px-6 lg:px-8 h-screen">
         <motion.div className="bg-white shadow-md rounded-lg overflow-hidden lg:mr-20 lg:ml-20 lg:mt-20 m-4 " variants={itemVariants}>
           <div className="p-4 m-8">
-            <motion.h3 className="font-bold text-xl mba-2 text-center">Hello {currentUser}</motion.h3>
+            <motion.h3 className="font-bold text-xl mb-2 text-center">Hello {currentUserName}</motion.h3>
             <motion.p className="text-gray-700 text-base text-center mt-5" id="info">
               {scoreInfo} 
             </motion.p>
