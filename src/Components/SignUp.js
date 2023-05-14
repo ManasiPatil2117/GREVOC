@@ -36,7 +36,7 @@ export default function SignUp({ setCurrentUser }) {
     const data = await res.json();
 
     if (data === 1) {
-      setCurrentUser(username);
+      setCurrentUser(email);
       setUserData({ email: "", password: "" });
       alert("Signed up Successfully!");
       navigate("/dashboard");
