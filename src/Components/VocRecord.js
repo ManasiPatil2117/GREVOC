@@ -17,7 +17,7 @@ export default function VocRecord({ record }) {
     setIsSpeaking(false);
   };
 
-  const speakImage = isSpeaking ? 'mikeGreen.png' : 'mikeBlack.png';
+  const speakImage = isSpeaking ? '/images/mikeGreen.png' : '/images/mikeBlack.png';
 
   return (
     <motion.div
