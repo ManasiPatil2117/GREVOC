@@ -16,7 +16,7 @@ export default function Dashboard() {
           <div className="max-w-7xl mx-auto">
             <div className="lg:text-center">
               <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                Master GRE Vocabulary
+                Master GRE Vocabulary 
               </h2>
               <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
                 Expand your vocabulary and improve your score on the GRE exam with our comprehensive study materials.
