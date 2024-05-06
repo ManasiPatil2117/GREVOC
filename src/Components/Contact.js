@@ -17,7 +17,7 @@ export default function Contact() {
     const contactForm = async (e) => {
         e.preventDefault();
         const { first_name, last_name, email, phone_number, message } = userData
-        const res = await fetch('http://localhost:5000/contact', {
+        const res = await fetch('https://grevoc-backend.onrender.com/contact', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
